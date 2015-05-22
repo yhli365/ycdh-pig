@@ -1,0 +1,31 @@
+-Pig
+http://pig.apache.org/
+
+-PigPen
+http://wiki.apache.org/pig/PigPen
+
+@version
+pig-0.12.0-cdh5.2.0.tar.gz
+
+#Install-------------------------------------------------
+#)unzip
+$ tar -xzf pig-0.12.0-cdh5.2.0.tar.gz -C /disk/cdh5/app/
+$ ln -s /disk/cdh5/app/pig-0.12.0-cdh5.2.0 ~/cdh/pig
+
+#)env
+$ vi ~/.bashrc
+export PIG_HOME=/home/yhli/cdh/pig
+export PATH=$PIG_HOME/bin:$PATH
+
+#)Execution
+/* local mode */
+$ pig -x local
+grunt> quit;
+
+/* mapreduce mode */
+$ pig
+or
+$ pig -x mapreduce
+
+#)示例
+max_temp.grunt

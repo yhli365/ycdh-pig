@@ -1,0 +1,57 @@
+Hadoop TDG3
+
+$ pig -x local pig/script.pig
+$ pig pig/script.pig
+
+#)11.4 Pig Latin
+:comment_c-style.pig 多行注释
+:comment_single_line.pig 单行注释
+:multiquery.grunt 多查询执行
+--在交互模式下，STORE和DUMP一样，总会触发执行
+$ pig pig/multiquery.pig
+:set.grunt 打开或关闭调试日志
+:tuples.grunt 数据类型
+:types.grunt 数据类型
+:schema.grunt 模式
+:null.grunt 验证与空值
+:missing.grunt 验证与空值
+:max_temp_macro_import.pig 宏定义
+$ pig -dryrun pig/max_temp_macro_import.pig
+$ pig pig/max_temp_macro_import.pig
+
+#)11.5 用户定义函数
+:max_temp_filter_udf.pig 过滤UDF
+$ pig pig/max_temp_filter_udf.pig
+:udfs.grunt 计算UDF/加载UDF
+
+#)11.6 数据处理操作
+:store.grunt 加载和存储数据
+:foreach.grunt 过滤数据
+:year_stats.pig 过滤数据
+$ pig pig/year_stats.pig
+:stream.grunt 过滤数据
+:max_temp_filter_stream.pig 过滤数据
+:join.grunt 数据的分组与连接
+:group.grunt 数据的分组与连接
+:max_temp_station_name.pig 数据的分组与连接
+:sort.grunt 数据的排序
+:combine.grunt 数据的组合和切分
+
+#)11.7 Pig实战
+:max_temp_param.pig 参数代换
+$ pig -param input=input/ncdc/micro-tab/sample.txt \
+    -param output=/tmp/out \
+    pig/max_temp_param.pig
+$ pig -param_file pig/max_temp_param.param \
+    pig/max_temp_param.pig
+$ hdfs dfs -cat /tmp/out/*
+$ hdfs dfs -rm -r /tmp/out
+
+:动态参数
+$ pig -param input=input/ncdc/micro-tab/sample.txt \
+    -param output=/tmp/out/`date "+%Y-%m-%d"` \
+    pig/max_temp_param.pig
+:参数代换代理
+$ pig -x local -dryrun -param input=input/ncdc/micro-tab/sample.txt \
+    -param output=/tmp/out/`date "+%Y-%m-%d"` \
+    pig/max_temp_param.pig
